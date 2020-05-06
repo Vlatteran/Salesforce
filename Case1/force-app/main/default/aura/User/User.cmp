@@ -1,0 +1,15 @@
+<aura:component >
+    <aura:attribute name = "user" 
+                    type = "User__c[]"
+                    default = "[{'Email__c' : 'soboleff@mail.ru',
+                                'Password__c' : '1234',
+                                'Name':''}]"/>
+    <aura:attribute name = "body" type = "Aura.Component[]"/>
+    <aura:handler name = "init" action = "{!c.doInit}" value = "{!this}"/>
+    <aura:handler name = "change" value = "{!v.user}" action = "{!c.login}"/>
+    
+    <aura:iteration items = "{!v.body}" var = "item">	
+        	<p>{!item}</p>
+    </aura:iteration>
+    
+</aura:component>

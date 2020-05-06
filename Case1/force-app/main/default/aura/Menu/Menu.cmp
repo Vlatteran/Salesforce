@@ -1,0 +1,22 @@
+<aura:component controller = "ShopController">
+    <aura:attribute name = "categoryList" type = "sObject[]"/>
+    <aura:attribute name = "filtersToApply" type = "String[]" default = ""/>
+    <aura:attribute name="productList" type="sObject[]"/>
+    <lightning:card title = "Filters">
+        <form class = "slds-form--stacked">
+            <div class="slds-card__body slds-card__body_inner">
+                <aura:iteration items = "{!v.categoryList}" var = "category">
+                    <lightning:input type = "checkbox"
+                                     label = "{!category.Name}"
+                                     name = "{!category.Name}"
+                                     id = "filter"
+                                     checked = "fasle"
+                                     onchange = "{!c.addFilterToApply}"/>
+                </aura:iteration>
+            
+            	<lightning:button label = "Apply"
+	                              onclick = "{!c.applyFilters}"/>
+            </div>
+        </form>
+    </lightning:card>
+</aura:component>

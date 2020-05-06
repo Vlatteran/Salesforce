@@ -1,0 +1,19 @@
+<aura:component>
+    <div class = "slds-grid">
+        <div class = "slds-col slds-sie_1-of-6">
+            <lightning:layout class="slds-page-header slds-page-header--object-home">
+                <lightning:layoutItem>
+                    <lightning:icon iconName="standard:scan_card" 
+                                    alternativeText="Products"/>
+                </lightning:layoutItem>	
+                <lightning:layoutItem padding="horizontal-small">
+                    <div class="page-section page-header">
+                        <h1 class="slds-text-heading--label">Shop</h1>
+                        <h2 class="slds-text-heading--medium">Products</h2>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+        <div class = "slds-col slds-sie_5-of-6"/>
+    </div>
+</aura:component>

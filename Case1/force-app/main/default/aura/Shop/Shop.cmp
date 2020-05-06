@@ -1,0 +1,9 @@
+<aura:component controller = "ShopController">
+    <aura:attribute name = "productList" type = "sObject[]"/>
+    <aura:attribute name = "categoryList" type = "sObject[]"/>
+    <aura:attribute name = "user" type = "User__c"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <c:Header/>
+    <c:Body productList = "{!v.productList}"
+            categoryList = "{!v.categoryList}"/>
+</aura:component>

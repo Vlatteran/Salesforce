@@ -1,0 +1,14 @@
+<aura:component>
+    <aura:attribute name = "product" type = "sObject"/>
+    <lightning:card title="{!v.product.Name}" 
+                    iconName="standard:scan_card">
+       <div class="slds-card__body slds-card__body_inner">
+            <aura:iteration items = "{!v.product.Product_Categories__r}" var = "item">
+                <span id = "badge" class = "slds-badge"> {!item.Name} </span>
+    		</aura:iteration>
+        </div>
+        <p class="slds-text-heading--medium slds-p-horizontal--small">
+           Price: <lightning:formattedNumber value="{!v.product.Price__c}" style="currency"/>
+        </p>
+    </lightning:card>
+</aura:component>

@@ -1,0 +1,5 @@
+<aura:component >
+	<aura:attribute name = "body" type = "Aura.Component[]"/>
+    <aura:attribute name = "user" type = "User__c[]"/>
+    {!v.body}
+</aura:component>

@@ -1,0 +1,19 @@
+<aura:component>
+    <aura:attribute name="productList" type="sObject[]"/>
+    <aura:attribute name = "categoryList" type = "sObject[]"/>
+    
+    <div class = "slds-grid">
+        <div class = "slds-col slds-sie_1-of-6">
+            <c:Menu categoryList = "{!v.categoryList}"
+                    productList = "{!v.productList}"/>
+        </div>
+        <div class = "slds-col slds-size_4-of-6">
+             <aura:iteration items = "{!v.productList}" var = "item">
+        		<c:ShopItem product = "{!item}"/>
+    		</aura:iteration>
+        </div>
+        <div class = "slds-col slds-size_1-of-6">
+            <c:User/>
+        </div>
+    </div>
+</aura:component>
