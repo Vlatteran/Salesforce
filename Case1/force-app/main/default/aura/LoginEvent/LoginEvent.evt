@@ -1,0 +1,6 @@
+<aura:event type="APPLICATION" description="Event template">
+    <aura:attribute name = "user" type = "User__c"/>
+    <aura:attribute name = "cart" type = "sObject[]"/>
+    <aura:attribute name = "cards" type = "Card__c[]"/>
+    <aura:attribute name = "orders" type = "Order__c[]"/>
+</aura:event>

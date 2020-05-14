@@ -16,7 +16,9 @@
                     console.log("success")
                     component.set("v.user", user);
                     var parent = component.get("v.parent");
-                    parent.set("v.user", user)
+                    parent.set("v.user", user);
+                    var garndparent = parent.get("v.parent");
+                    grandparent.set("v.isLogged", true);
                 }
             }else {
                 console.log("Failed with state: " + state);

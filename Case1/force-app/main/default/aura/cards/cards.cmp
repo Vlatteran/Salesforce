@@ -1,0 +1,7 @@
+<aura:component >
+    <aura:attribute name = "cards" type = "sObject[]"/>
+    <aura:handler name = "login" event = "c:LoginEvent" action = "{!c.updeteCards}"/>
+    <aura:iteration items = "{!v.cards}" var = "card">
+        <c:cardItem card = "{!card}"/>
+    </aura:iteration>
+</aura:component>

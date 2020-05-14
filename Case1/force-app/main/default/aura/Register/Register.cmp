@@ -1,0 +1,37 @@
+<aura:component controller = "UserController">
+    <aura:attribute name = "newUser" type = "User__c"
+                    default = "{'Email__c' : '',
+                                'Password__c' : '',
+                                'Name':''}"/>
+    <aura:attribute name = "confirmPassword" type = "String"/>
+    <aura:registerEvent name="login" type="c:LoginEvent"/>
+	<form class="slds-form--stacked">
+        <lightning:input aura:id="register" 
+                         label="Name"
+                         name="userName"
+                         value="{!v.newUser.Name}"
+                         required="true"/>
+        <lightning:input aura:id="register" 
+                         label="Email"
+                         name="userEmail"
+                         value="{!v.newUser.Email__c}"
+                         type = "Email"
+                         required="true"/>
+        <lightning:input aura:id="register" 
+                         label="Password"
+                         name="userPassword"
+                         value="{!v.newUser.Password__c}"
+                         type = "password"
+                         required="true"/>
+        <lightning:input aura:id="register" 
+                         label="Confirm password"
+                         name="userConfirmPassword"
+                         value="{!v.confirmPassword}"
+                         type = "password"
+                         required="true"/>
+        <lightning:button label="Register" 
+                          class="slds-m-top--medium"
+                          variant="brand"
+                          onclick = "{!c.register}"/>
+    </form>
+</aura:component>

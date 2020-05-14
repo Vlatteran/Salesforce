@@ -6,56 +6,57 @@
                                 'Name':''}"/>
     <aura:attribute name = "confirmPassword" type = "String"/>
     <aura:attribute name = "parent" type = "Aura.Component"/>
-    <lightning:card title = "Login or register">
-        <div class="slds-card__body slds-card__body_inner">
-        <form class="slds-form--stacked">
-                <lightning:input aura:id="login" 
-                                 label="Email"
-                                 name="userEmail"
-                                 value="{!v.user[0].Email__c}"
-                                 required="true"/>
-                <lightning:input aura:id="login" 
-                                 label="Password"
-                                 name="userPassword"
-                                 value="{!v.user[0].Password__c}"
-                                 type = "password"
-                                 required="true"/>
-                <lightning:button label="Log in" 
-                                  class="slds-m-top--medium"
-                                  variant="brand"
-                                  onclick = "{!c.login}"/>
-        </form>
-        <p>{!v.user}</p>
-        <form class="slds-form--stacked">
-            <lightning:input aura:id="register" 
-                             label="Name"
-                             name="userName"
-                             value="{!v.newUser.Name}"
-                             required="true"/>
-            <lightning:input aura:id="register" 
-                             label="Email"
-                             name="userEmail"
-                             value="{!v.newUser.Email__c}"
-                             required="true"/>
-            <lightning:input aura:id="register" 
-                             label="Password"
-                             name="userPassword"
-                             value="{!v.newUser.Password__c}"
-                             type = "password"
-                             required="true"/>
-            <lightning:input aura:id="register" 
-                             label="Confirm password"
-                             name="userConfirmPassword"
-                             value="{!v.confirmPassword}"
-                             type = "password"
-                             required="true"/>
-            <lightning:button label="Register" 
-                              class="slds-m-top--medium"
-                              variant="brand"
-                              onclick = "{!c.register}"/>
-            <p>{!v.confirmPassword}</p>
-            <p>{!v.newUser.Password__c}</p>
-        </form>
-    </div>
-    </lightning:card>
+            <lightning:tabset>
+        <lightning:tab label="Item One">
+            <form class="slds-form--stacked">
+                        <lightning:input aura:id="login" 
+                                         label="Email"
+                                         name="userEmail"
+                                         value="{!v.user[0].Email__c}"
+                                         type = "Email"
+                                         required="true"/>
+                        <lightning:input aura:id="login" 
+                                         label="Password"
+                                         name="userPassword"
+                                         value="{!v.user[0].Password__c}"
+                                         type = "password"
+                                         required="true"/>
+                        <lightning:button label="Log in" 
+                                          class="slds-m-top--medium"
+                                          variant="brand"
+                                          onclick = "{!c.login}"/>
+                    </form>
+        </lightning:tab>
+        <lightning:tab label="Register">
+             <form class="slds-form--stacked">
+                        <lightning:input aura:id="register" 
+                                         label="Name"
+                                         name="userName"
+                                         value="{!v.newUser.Name}"
+                                         required="true"/>
+                        <lightning:input aura:id="register" 
+                                         label="Email"
+                                         name="userEmail"
+                                         value="{!v.newUser.Email__c}"
+                                         type = "Email"
+                                         required="true"/>
+                        <lightning:input aura:id="register" 
+                                         label="Password"
+                                         name="userPassword"
+                                         value="{!v.newUser.Password__c}"
+                                         type = "password"
+                                         required="true"/>
+                        <lightning:input aura:id="register" 
+                                         label="Confirm password"
+                                         name="userConfirmPassword"
+                                         value="{!v.confirmPassword}"
+                                         type = "password"
+                                         required="true"/>
+                        <lightning:button label="Register" 
+                                          class="slds-m-top--medium"
+                                          variant="brand"
+                                          onclick = "{!c.register}"/>
+                    </form>
+        </lightning:tab>
+    </lightning:tabset>
 </aura:component>

@@ -1,0 +1,6 @@
+<aura:component >
+    <aura:attribute name = "card" type = "sObject"/>
+    <lightning:card title = "{!v.card.Name}" class="slds-card__body slds-card__body_inner">
+        <p>Amount: {!v.card.Amount__c}</p>
+    </lightning:card>
+</aura:component>

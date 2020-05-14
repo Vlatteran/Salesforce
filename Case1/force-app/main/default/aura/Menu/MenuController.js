@@ -1,6 +1,7 @@
 ({
 	applyFilters : function(component, event, helper) {
         var filtersToApply = component.get("v.filtersToApply");
+        console.log(filtersToApply);
         if (filtersToApply.length === 0){
             var getProducts = component.get("c.getProducts");
         }else{

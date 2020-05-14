@@ -1,0 +1,28 @@
+<aura:component >
+    <aura:attribute name = "product" type = "sObject"/>
+        <lightning:card title="{!v.product.Product__r.Name}" 
+                    	iconName="standard:scan_card">
+       		<div class="slds-card__body slds-card__body_inner">
+            	<aura:iteration items = "{!v.product.Product_Categories__r}" var = "item">
+                    <span id = "badge" class = "slds-badge"> {!item.Name} </span>
+    			</aura:iteration>
+        	</div>
+        	<p class="slds-text-heading--medium slds-p-horizontal--small">
+           		Price: <lightning:formattedNumber value="{!v.product.Product__r.Price__c}" style="currency"/>
+        	</p>
+            <p class="slds-text-heading--medium slds-p-horizontal--small">
+           		Quantity:
+                <lightning:buttonGroup>
+                    <lightning:input value = "{!v.product.Quantity__c}" variant = "label-hidden"/>
+                    <lightning:button label="-" onclick = "{!c.changeQuantity}" 
+                                      disabled = "{!v.product.Quantity__c le 1}"/>
+                    <lightning:button label="delete" onclick = "{!c.changeQuantity}"/>
+                    <lightning:button label="+" onclick = "{!c.changeQuantity}"/>
+                </lightning:buttonGroup>
+        	</p>
+            <p class="slds-text-heading--medium slds-p-horizontal--small">
+           		Total: <lightning:formattedNumber value="{!v.product.Quantity__c * v.product.Product__r.Price__c}"
+                                                  style="currency"/>
+        	</p>
+    	</lightning:card>
+</aura:component>

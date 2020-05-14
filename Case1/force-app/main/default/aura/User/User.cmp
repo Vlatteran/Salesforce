@@ -1,15 +1,32 @@
-<aura:component >
-    <aura:attribute name = "user" 
-                    type = "User__c[]"
-                    default = "[{'Email__c' : 'soboleff@mail.ru',
-                                'Password__c' : '1234',
-                                'Name':''}]"/>
-    <aura:attribute name = "body" type = "Aura.Component[]"/>
-    <aura:handler name = "init" action = "{!c.doInit}" value = "{!this}"/>
-    <aura:handler name = "change" value = "{!v.user}" action = "{!c.login}"/>
+<aura:component controller = "UserController">
+    <aura:attribute name = "user" type = "User__c"/>
+    <aura:attribute name = "cards" type = "sObject[]"/>
+    <aura:attribute name = "orders" type = "sObject[]"/>
+    <aura:attribute name = "isLogged" type = "Boolean" default = "false"/>
+    <aura:handler name = "login" event = "c:LoginEvent" action = "{!c.login}"/>
     
-    <aura:iteration items = "{!v.body}" var = "item">	
-        	<p>{!item}</p>
-    </aura:iteration>
+    <aura:if isTrue = "{!!v.isLogged}">
+    	<lightning:tabset>	
+            <lightning:tab label = "Log in" id = "login">
+                <c:LogIn/>
+            </lightning:tab>
+            <lightning:tab label = "Register">
+                <c:Register/>
+            </lightning:tab>
+        </lightning:tabset>
+    </aura:if>
+    <aura:if isTrue = "{!v.isLogged}">
+        <lightning:tabset>	
+        	<lightning:tab label = "Info" id = "info">
+                <c:showUser user = "{!v.user}"/>
+        	</lightning:tab>
+        	<lightning:tab label = "Cards">
+                <p>{!v.cards[0].name}</p>
+                <c:cards cards = "{!v.cards}"/>
+        	</lightning:tab>
+        	<lightning:tab label = "Orders">
+        	</lightning:tab>
+    	</lightning:tabset>
+    </aura:if>
     
 </aura:component>

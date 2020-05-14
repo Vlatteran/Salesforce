@@ -1,0 +1,18 @@
+<aura:component controller = "CartController">
+    <aura:attribute name = "cart" type = "sObject[]"/>
+    <aura:attribute name = "total" type = "Integer"/>
+    <aura:handler name = "init" value = "{!this}" action = "{!c.changeCart}"/>
+    <aura:handler name = "change" value = "{!v.cart}" action = "{!c.changeCart}"/>
+    <aura:registerEvent name="cartUpdate" type="c:cartUpdate"/>
+    <aura:iteration items = "{!v.cart}" var = "product">
+        <c:cartItem product = "{!product}"/>        
+    </aura:iteration>
+    <lightning:buttonGroup>
+        <lightning:button label="Save" onclick = "{!c.saveChanges}"/>
+        <lightning:button label="Discard" onclick = "{!c.oldCart}"/>
+    </lightning:buttonGroup>
+    <p class="slds-text-heading--medium slds-p-horizontal--small">
+        Total: <lightning:formattedNumber value="{!v.total}"
+                                          style="currency"/>
+    </p>   
+</aura:component>

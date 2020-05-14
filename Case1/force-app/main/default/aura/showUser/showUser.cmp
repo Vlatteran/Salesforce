@@ -1,8 +1,6 @@
 <aura:component >
-	<aura:attribute name = "user" type = "User__c[]"/>
-    <lightning:card title = "{!v.user[0].Name}">
-        <div class="slds-card__body slds-card__body_inner">{!v.user[0].Email__c}</div>
-        <aura:iteration items = "{!v.user[0].Cards__r}" var = "Card">
-        </aura:iteration>
+	<aura:attribute name = "user" type = "User__c"/>
+    <lightning:card title = "{!v.user.Name}">
+        <div class="slds-card__body slds-card__body_inner">{!v.user.Email__c}</div>
     </lightning:card>
 </aura:component>
