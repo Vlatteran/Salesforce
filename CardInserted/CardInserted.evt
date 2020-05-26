@@ -1,0 +1,8 @@
+<!--
+ - Created by Hacker on 20.05.2020.
+ -->
+
+<aura:event type="APPLICATION" description="CardInserted">
+    <aura:attribute name="card" type="sObject"/>
+    <aura:attribute name="ATM" type="sObject"/>
+</aura:event>

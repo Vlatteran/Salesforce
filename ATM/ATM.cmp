@@ -1,0 +1,15 @@
+<aura:component controller = "ATMController">
+    <aura:attribute name = "location" type = "String" default="insertCard"/>
+    <aura:attribute name = "ATM" type = "sObject"/>
+    <aura:attribute name = "card" type = "sObject"/>
+
+    <aura:handler name="ChangeLocation" event="c:ChangeLocation" action="{!c.changeLocation}"/>
+    <aura:handler name="CardInserted" event="c:CardInserted" action="{!c.cardInserted}"/>
+
+    <aura:if isTrue = "{!v.location == 'insertCard'}">
+        <c:InsertCard/>
+    </aura:if>
+    <aura:if isTrue="{!v.location == 'mainMenu'}">
+        <c:MainMenu card = "{!v.card}" ATM = "{!v.ATM}"/>
+    </aura:if>
+</aura:component>

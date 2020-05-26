@@ -1,0 +1,36 @@
+<!--
+ - Created by Hacker on 20.05.2020.
+ -->
+
+<aura:component description="InsertCard" controller = "ATMController">
+    <aura:attribute name="ATMs" type="sObject[]"/>
+    <aura:attribute name = "card"
+                    type = "sObject"
+                    default = "{'type' : 'Card__c',
+                                'Number__c' : '',
+                                'PIN__c' : ''}"/>
+
+    <aura:handler name = "init" value = "{!this}" action = "{!c.init}"/>
+    <aura:registerEvent name="ChangeLocation" type="c:ChangeLocation"/>
+    <aura:registerEvent name="CardInserted" type="c:CardInserted"/>
+
+    <lightning:card title = "Insert card"
+                    class="slds-p-horizontal_small">
+        <lightning:input label = "Card Number"
+                         type = "tel"
+                         value = "{!v.card.Number__c}"
+                         pattern = "[0-9]{16}"
+                         messageWhenPatternMismatch = "Number of card can't be like this"/>
+        <lightning:input label = "PIN"
+                         type = "Password"
+                         value = "{!v.card.PIN__c}"/>
+        <lightning:select label="ATM:"  aura:id = "selectATM">
+            <option value="Choose ATM">Choose ATM</option>
+            <aura:iteration items="{!v.ATMs}" var="ATM">
+                <option value="{!ATM.Bank__r.Name}">{!ATM.Name}</option>
+            </aura:iteration>
+        </lightning:select>
+        <lightning:button label = "Confirm" onclick = "{!c.confirmClick}"/>
+
+    </lightning:card>
+</aura:component>

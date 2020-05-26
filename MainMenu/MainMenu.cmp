@@ -1,0 +1,109 @@
+<!--
+ - Created by Hacker on 20.05.2020.
+ -->
+
+<aura:component description="MainMenu" controller="ATMController">
+    <aura:attribute name="card" type="sObject"/>
+    <aura:attribute name="ATM" type="sObject"/>
+    <aura:attribute name="showBalance" type="boolean" default="false"/>
+    <aura:attribute name="transaction" type="sObject" default="{'type' : 'Transaction__c',
+                                                                'Amount__c' : 0.00,
+                                                                'Commission__c' : 0.00,
+                                                                'Currency__c' : 'RUB',
+                                                                'ATM__c' : '',
+                                                                'Card__c' : ''}"/>
+    <aura:attribute name="rate" type="Integer" default="1"/>
+    <aura:attribute name="total" type="Double" default="0"/>
+
+    <aura:handler name="change" value="{!v.transaction}" action="{!c.totalCount}"/>
+
+    <aura:registerEvent name="ChangeLocation" type="c:ChangeLocation"/>
+    <aura:registerEvent name="CardInserted" type="c:CardInserted"/>
+
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-6"/>
+        <div class="slds-col slds-size_4-of-6">
+            <lightning:tabset variant="scoped">
+                <lightning:tab label = "Check balance">
+                    <lightning:button label="{! v.showBalance ? 'Hide balance' : 'Show balance'}" onclick="{!c.showBalance}"/>
+                        <p class="slds-text-heading--medium slds-p-horizontal--small">
+                            Balance:
+                            <aura:if isTrue="{!v.showBalance}">
+                                <lightning:formattedNumber value="{!v.card.Amount__c}" style="currency"/>
+                                <br/>
+                                <aura:if isTrue="{!v.card.Credit__c}">
+                                    Credit limit:  <lightning:formattedNumber value="{!v.card.CreditLimit__c}" style="currency"/>
+                                </aura:if>
+                                <aura:set attribute="else">
+                                    <lightning:formattedText value="*******"/>
+                                </aura:set>
+                            </aura:if>
+                        </p>
+                </lightning:tab>
+                <lightning:tab label = "Withdraw cash">
+                    <p class="slds-text-heading--medium slds-p-horizontal--small">
+                        <lightning:buttonGroup >
+                            <lightning:input type="number"
+                                             label="Select the amount"
+                                             value="{!v.transaction.Amount__c}"
+                                             step="0.01"
+                                             min = "10"
+                                             onchange="{!c.commissionCount}"/>
+                            <lightning:select name="select1" label="Choose currency:" aura:id="selectCurrency" onchange="{!c.changeCurrency}">
+                                <option value="RUB">RUB</option>
+                                <option value="USD">USD</option>
+                                <option value="BYN">BYN</option>
+                            </lightning:select>
+                        </lightning:buttonGroup>
+                        <br/>
+                        <aura:if isTrue="{!!(v.ATM.Bank__r.Commission__c == 0 || v.card.Bank__r.Name == v.ATM.Bank__r.Name)}">
+                            Commission:
+                            <lightning:formattedNumber value="{!v.transaction.Commission__c}"/>
+                            {!' ' + v.transaction.Currency__c}
+                            <aura:set attribute="else">
+                                No commission is taken
+                            </aura:set>
+                        </aura:if>
+                        <br/>
+                        Total to withdraw from the card:
+                        <lightning:formattedNumber value="{!(v.total)}"
+                                                   style="currency"/>
+                    </p>
+                    <lightning:buttonGroup>
+                        <lightning:button label="Withdraw cash" onclick="{!c.withdrawCash}"/>
+                    </lightning:buttonGroup>
+                </lightning:tab>
+                <lightning:tab label="Exit">
+                    <lightning:button label="Exit" onclick="{!c.exit}"/>
+                </lightning:tab>
+            </lightning:tabset>
+        </div>
+        <div class="slds-col slds-size_1-of-6">
+            <lightning:card title="{!v.ATM.Bank__r.Name}">
+                <p class="slds-text-heading--medium slds-p-horizontal--small">
+                    <aura:if isTrue="{!v.card.Bank__r.Name == v.ATM.Bank__r.Name}">
+                        Exchange rate:
+                        <br/>
+                        USD = <lightning:formattedNumber value="{!v.card.Bank__r.USDRate__c}" style="currency"/>
+                        <br/>
+                        BYN = <lightning:formattedNumber value="{!v.card.Bank__r.BYR__c}" style="currency"/>
+                        <aura:set attribute="else">
+                            Commission: <lightning:formattedNumber value="{!v.ATM.Bank__r.Commission__c}"/>%
+                        </aura:set>
+                    </aura:if>
+                </p>
+            </lightning:card>
+            <aura:if isTrue="{!v.card.Bank__r.Name != v.ATM.Bank__r.Name}">
+                <lightning:card title="{!v.card.Bank__r.Name}">
+                    <p class="slds-text-heading--medium slds-p-horizontal--small">
+                            Exchange rate:
+                            <br/>
+                            USD = <lightning:formattedNumber value="{!v.card.Bank__r.USDRate__c}" style="currency"/>
+                            <br/>
+                            BYN = <lightning:formattedNumber value="{!v.card.Bank__r.BYR__c}" style="currency"/>
+                    </p>
+                </lightning:card>
+            </aura:if>
+        </div>
+    </div>
+</aura:component>
